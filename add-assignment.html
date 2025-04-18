@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Assignment</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Ready to your new assignment?</h1>
+  <form id="addAssignmentForm">
+    <input type="text" id="assignmentName" placeholder="Assignment Name" required>
+    
+    <p>Set Deadline:</p>
+    <input type="date" id
+    ="deadline" required>
+    <button type="submit">Save Assignment</button>
+  </form>
+ 
+  <button onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+
+  <script>
+    document.getElementById("addAssignmentForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const assignmentName = document.getElementById("assignmentName").value;
+      const deadline = document.getElementById("deadline").value;
+
+      const assignments = JSON.parse(localStorage.getItem("assignments")) || [];
+      assignments.push({ name: assignmentName, deadline: deadline });
+      localStorage.setItem("assignments", JSON.stringify(assignments));
+
+      alert("Assignment added successfully!");
+      window.location.href = "view-assignments.html"; // Redirect to View Assignments page
+    });
+  </script>
+</body>
+</html>
